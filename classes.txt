@@ -1,0 +1,24 @@
+classe Carro(m, c, p):
+    marca = m
+    cor = c
+    placa = p
+
+    def correr():
+        print(placa, 'está correndo!')
+
+    def buzinar():
+        print('Bi! bi!')
+
+
+carro1 = Carro('BMW', 'Preta', 'foda-se')
+carro1.marca
+carro1.correr() # 'foda-se está correndo!'
+
+
+carro2 = Carro('Fusca', 'Verde', 'cafona')
+carro2.correr() # 'cafona está correndo!'
+
+a = int(12)
+
+s = '12e3'
+s.isnumeric()
