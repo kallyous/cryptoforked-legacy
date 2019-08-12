@@ -7,15 +7,6 @@ def mdc(a, b):
     return a
 
 
-# Calcula, por força bruta, a inversa multiplicativa modular de dois números
-''' R1: d*e mod ϕ(n) = 1 '''
-def modmultinv(e, fin):
-    for d in range(1, fin):
-        if (e * d) % fin == 1:
-            return d
-    return None
-
-
 ''' fin = ϕ(n) = ϕ(p*q) = (p-1)*(q-1)
     R1: 1 < e < fin
     R2: e co-primo n, ϕ(n)
@@ -28,6 +19,14 @@ def gen_e_n_fin(p, q):
         if mdc(e, fin) == 1 and mdc(e, n) == 1:
             return e, n, fin
 
+
+# Calcula, por força bruta, a inversa multiplicativa modular de dois números
+''' R1: d*e mod ϕ(n) = 1 '''
+def modmultinv(e, fin):
+    for d in range(1, fin):
+        if (e * d) % fin == 1:
+            return d
+    return None
 
 
 # O coração da bagaça.
@@ -54,15 +53,16 @@ def decryptpart(c, d, n):
 
 # Criptografa uma string
 def encrypt(plain_txt, e, n):
-    cripto = []
+    cripto = ''
     for c in plain_txt:
-        cripto.append(chr(encryptpart(ord(c), e, n)))
-    return ''.join(cripto)
+        cripto += ' {}'.format(encryptpart(ord(c), e, n))
+    return cripto.strip(' ')
 
 
 # Descriptografa string criptografada
 def decrypt(encry_text, d, n):
-    plain = []
-    for c in encry_text:
-        plain.append(chr(decryptpart(ord(c), d, n)))
-    return ''.join(plain)
+    plain = ''
+    encry_code_list = encry_text.split(' ')
+    for code in encry_code_list:
+        plain += chr(decryptpart(int(code), d, n))
+    return plain

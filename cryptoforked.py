@@ -1,4 +1,6 @@
 from cfrsa import genkeypairs, encrypt, decrypt, modmultinv
+from offsetter import encode_str, decode_str
+
 
 ''' Recebe a opção escolhida pelo usuário e executa as operações pertinentes a esta opção.
     Nada é de fato implementado aqui dentro, tudo referente ao RSA é chamado por funções.
@@ -10,7 +12,7 @@ def selectOption(opt):
     # Opção de gerar chaves criptográficas.
     if opt == '1':
         # Nomes auto-descritivos dos arquivos que armazenarão informações das chaves.
-        de_name = 'rsa_d_n_key.priv'
+        dn_name = 'rsa_d_n_key.priv'
         pqe_name = 'rsa_p_q_e_key.priv'
         en_name = 'rsa_e_n_key.pub'
 
@@ -25,9 +27,9 @@ def selectOption(opt):
         d, n = priv
 
         # Salva chave privada (d n)
-        with open(de_name, 'w') as file:
+        with open(dn_name, 'w') as file:
             file.write('{} {}'.format(d, n))
-        print('Chave privada (d n) salva em', de_name)
+        print('Chave privada (d n) salva em', dn_name)
 
         # Salva chave privada redundante (p q e)
         with open(pqe_name, 'w') as file:
@@ -111,15 +113,20 @@ def selectOption(opt):
         e, n = pub
         d, n = priv
         # Escolha da mensagem a criptografar
-        plain_str = 'Bom dia!'
+        plain_str = 'BOM DIA'
+        # Encoda mensagem no acordo do projeto
+        encoded_str = encode_str(plain_str)
         print('Texto inicial:', plain_str)
+        print('Texto encodado:', encoded_str)
         # Criptografa mensagem
-        enc_str = encrypt(plain_str, e, n)
-        print('Texto criptografado:', enc_str)
+        encry_str = encrypt(encoded_str, e, n)
+        print('Texto criptografado:', encry_str)
         print(120 * '-')
         # Descriptografa mensagem
-        final_str = decrypt(enc_str, d, n)
-        print('Texto descriptografado:', final_str)
+        decry_str = decrypt(encry_str, d, n)
+        print('Texto descriptografado:', decry_str)
+        decoded_str = decode_str(decry_str)
+        print('Texto descriptografado e decodado:', decoded_str)
 
 
 # MAIN - O programa começa aqui!
