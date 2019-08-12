@@ -9,7 +9,7 @@ def selectOption(opt):
 
     # Opção de gerar chaves criptográficas.
     if opt == '1':
-        # São os nomes auto-descritivos dos arquivos que armazenarão informações das chaves.
+        # Nomes auto-descritivos dos arquivos que armazenarão informações das chaves.
         de_name = 'rsa_d_n_key.priv'
         pqe_name = 'rsa_p_q_e_key.priv'
         en_name = 'rsa_e_n_key.pub'
@@ -126,7 +126,7 @@ def selectOption(opt):
 if __name__ == '__main__':
     print(120*'-')
     # Mensagem de título
-    print('Cryptoforked 1.0.1a')
+    print('Cryptoforked 1.0.2')
     print(120*'-')
     # Mensagem de opções disponíveis
     print('\nEscolha uma opção:\n\n1. Gerar chave pública\n2. Criptografar\n3. Descriptografar\n4. Debugar\n')
