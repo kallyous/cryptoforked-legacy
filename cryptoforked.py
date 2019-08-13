@@ -1,4 +1,4 @@
-from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, modmultinv
+from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, gen_n_e_d, modmultinv
 from offsetter import encode_str, decode_str
 
 
@@ -90,7 +90,7 @@ def selectOption(opt):
             que é o nosso d. Como usamos (d n) para descriptografar e (e n) para criptografar, faz
             mais sentido armazenar-mos estas chaves e não (p q e). '''
         n = p*q
-        fin = (p - 1) * (q - 1)
+        fin = (p-1)*(q-1)
         d = modmultinv(e, fin)
         ''' -------------------------------------------------------------------------------------- '''
 
