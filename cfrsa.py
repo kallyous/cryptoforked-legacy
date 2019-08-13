@@ -59,6 +59,15 @@ def encrypt(plain_txt, e, n):
     return cripto.strip(' ')
 
 
+# Criptografa uma string encodada pelo acordo
+def encrypt_encoded(encoded_txt, e, n):
+    decoded_nums = list(map(int, encoded_txt.split()))
+    cripto = ''
+    for c in decoded_nums:
+        cripto += ' {}'.format(encryptpart(c, e, n))
+    return cripto.strip(' ')
+
+
 # Descriptografa string criptografada
 def decrypt(encry_text, d, n):
     plain = ''
@@ -66,3 +75,12 @@ def decrypt(encry_text, d, n):
     for code in encry_code_list:
         plain += chr(decryptpart(int(code), d, n))
     return plain
+
+
+# Descriptografa string criptografada
+def decrypt_encoded(encry_text, d, n):
+    encry_nums = list(map(int, encry_text.split()))
+    plain = ''
+    for c in encry_nums:
+        plain += ' {}'.format(decryptpart(c, d, n))
+    return plain.strip()

@@ -5,21 +5,23 @@
 
 
 offset = 65
-space = 27
+space = 26
+
 
 # Encoda string para ser criptografada
 def encode_str(plain_str):
     encoded = ''
     for c in plain_str:
-        encoded +=
+        encoded += ' {}'.format(encode_char(c))
     return encoded
 
 
 # Decodifica string
-def decode_list(encoded_list):
+def decode_str(encoded_str):
     plain_str = ''
+    encoded_list = encoded_str.split()
     for n in encoded_list:
-        plain_str += chr(decode_num(n))
+        plain_str += chr(decode_num(int(n)))
     return plain_str
 
 
@@ -33,3 +35,8 @@ def encode_char(c):
 def decode_num(n):
     if n == space: return ord(' ')
     else: return n + offset
+
+def coding_test():
+    plain_txt = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ '
+    encoded_txt = encode_str(plain_txt)
+    print(encoded_txt)

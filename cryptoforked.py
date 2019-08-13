@@ -1,4 +1,4 @@
-from cfrsa import genkeypairs, encrypt, decrypt, modmultinv
+from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, modmultinv
 from offsetter import encode_str, decode_str
 
 
@@ -57,8 +57,11 @@ def selectOption(opt):
         # Quebra a string contendo os valores das chaves em duas strings menores contendo cada uma um valor
         e, n = pub_key.split(' ')
 
+        # Encoda texto no acordo do projeto
+        encoded_txt = encode_str(plain_text)
+
         # Convertendo as strings com os valores (e n) para os números inteiros que representam, criptografa o texto
-        encry_text = encrypt(plain_text, int(e), int(n))
+        encry_text = encrypt_encoded(encoded_txt, int(e), int(n))
 
         # Salva e exibe o texto criptografado
         with open(encry_txt_name, 'w') as file:
@@ -97,12 +100,16 @@ def selectOption(opt):
         print('Texto criptografado:\n', encry_txt, sep='')
 
         # Descriptografa
-        decry_txt = decrypt(encry_txt, d, n)
+        encoded_txt = decrypt_encoded(encry_txt, d, n)
+        print('Texto descriptografado mas encodado:\n', encoded_txt, sep='')
+
+        # Decodifica
+        plain_txt = decode_str(encoded_txt)
 
         # Salva e exibe conteúdo descriptografado
         with open(decry_file_name, 'w') as file:
-            file.write(decry_txt)
-        print('Texto descriptografado:\n', decry_txt, sep='')
+            file.write(plain_txt)
+        print('Texto descriptografado e decodificado:\n', plain_txt, sep='')
 
     # Executa os procedimentos de geração de chaves, criptografia e descriptografia para testar o programa
     elif opt == '4':
@@ -112,18 +119,19 @@ def selectOption(opt):
         pub, priv = genkeypairs(p, q)
         e, n = pub
         d, n = priv
+        print('p={} q={} n={} e={} d={}'.format(p, q, n, e, d))
         # Escolha da mensagem a criptografar
         plain_str = 'BOM DIA'
-        # Encoda mensagem no acordo do projeto
+        #1 Encoda mensagem no acordo do projeto
         encoded_str = encode_str(plain_str)
         print('Texto inicial:', plain_str)
         print('Texto encodado:', encoded_str)
-        # Criptografa mensagem
-        encry_str = encrypt(encoded_str, e, n)
+        #2 Criptografa mensagem
+        encry_str = encrypt_encoded(encoded_str, e, n)
         print('Texto criptografado:', encry_str)
         print(120 * '-')
         # Descriptografa mensagem
-        decry_str = decrypt(encry_str, d, n)
+        decry_str = decrypt_encoded(encry_str, d, n)
         print('Texto descriptografado:', decry_str)
         decoded_str = decode_str(decry_str)
         print('Texto descriptografado e decodado:', decoded_str)
@@ -133,7 +141,7 @@ def selectOption(opt):
 if __name__ == '__main__':
     print(120*'-')
     # Mensagem de título
-    print('Cryptoforked 1.0.2')
+    print('Cryptoforked 1.1.1a')
     print(120*'-')
     # Mensagem de opções disponíveis
     print('\nEscolha uma opção:\n\n1. Gerar chave pública\n2. Criptografar\n3. Descriptografar\n4. Debugar\n')
