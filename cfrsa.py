@@ -50,19 +50,14 @@ def exp_mod_rap(base, power, modulus):
     return result
 
 
-# Gera (n e d) usando o Algoritmo de Euclides Estendido
-def gen_n_e_d(p, q):
-    n = p*q
+# Gera (e d) usando o Algoritmo de Euclides Estendido
+def gen_e_d(p, q):
     fin = (p - 1) * (q - 1)
     while True:
         e = randrange(2, fin)
-        mf, xf, yf = ext_eucl_mdc(e, fin)
-        if mf == 1:
-            mn, xn, yn = ext_eucl_mdc(e, n)
-            if mn == 1:
-                d = xf * e  # Note que pegamos a inversa de (e ϕ(n))
-                return n, e, d
-
+        m, x, y = ext_eucl_mdc(e, fin)
+        if m == 1:
+            return e, e * x
 
 # Gera o par de chaves privada e pública
 ''' Usando o par de primos (p q), calcula os valores de (d e n) e os retorna.
@@ -70,7 +65,8 @@ def gen_n_e_d(p, q):
     Leia d por decrypt key ou Descriptografar
     O valor de fin é a quantidade de có-primos de n, dada pefa funçao ϕ(n) = ϕ(p*q) = (p-1)*(q-1) '''
 def genkeypairs(p, q):
-    n, e, d = gen_n_e_d(p, q)
+    n = p*q
+    e, d = gen_e_d(p, q)
     return (e, n), (d, n)
 
 

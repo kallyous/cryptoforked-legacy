@@ -1,4 +1,4 @@
-from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, gen_n_e_d, modmultinv
+from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, modmultinv
 from offsetter import encode_str, decode_str
 
 
