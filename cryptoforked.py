@@ -86,7 +86,7 @@ def selectOption(opt):
         ''' --------------------------------------------------------------------------------------
             Completamente desnecessário, não fosse a exigência imposta nas especificações do trabalho
             de descriptografar usando (p q e). Melhor seria descartar p q, mantendo apenas d e n.
-            O que é feito aqui nada mais é do que repetir o cáculo da inversa multiplicativa modular,
+            O que é feito aqui nada mais é do que repetir o cáculo da inversa multiplicativa modular de 'e',
             que é o nosso d. Como usamos (d n) para descriptografar e (e n) para criptografar, faz
             mais sentido armazenar-mos estas chaves e não (p q e). '''
         n = p*q
