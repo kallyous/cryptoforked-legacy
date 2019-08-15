@@ -39,7 +39,7 @@ def decode_str(encoded_str): # '0 26 1 2'.split()
     encoded_list = encoded_str.split()
     for n in encoded_list:
         plain_str += chr(decode_num(int(n)))
-    return plain_str
+    return plain_str # 'A BC'
 
 
 def coding_test():
