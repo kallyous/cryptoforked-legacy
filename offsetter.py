@@ -1,12 +1,11 @@
-''' Fluxo de codificação e criptografia:
+""" Fluxo de codificação e criptografia:
 
     Criptografar:
         "A BC" -> encode -> "0 26 1 2" -> encrypt(e, n) -> "34 54 65 78"
-
     Descriptografar:
         "34 54 65 78" -> decrypt(d, n) -> "0 26 1 2" -> decode -> "A BC"
 
-'''
+"""
 
 
 offset = 65

@@ -1,4 +1,4 @@
-from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, ext_eucl_mdc, modmultinv
+from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, modmultinv
 from offsetter import encode_str, decode_str
 
 
@@ -92,8 +92,6 @@ def selectOption(opt):
         n = p*q
         fin = (p-1)*(q-1)
         d = modmultinv(e, fin)
-        # m, x, y = ext_eucl_mdc(e, fin)
-        # d = int(e)*int(x)
         ''' -------------------------------------------------------------------------------------- '''
 
         # Carrega conteúdo criptografado do arquivo
