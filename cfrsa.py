@@ -11,8 +11,8 @@ def gen_e_d(p, q):
     """
     fin = (p - 1) * (q - 1)
     while True:
-        e = randrange(2, fin) # 1 não serve
-        if mdc(e, fin) == 1 and mdc(e, p*q) == 1:
+        e = randrange(2, fin)  # 1 não serve
+        if mdc(e, fin) == 1 and mdc(e, p * q) == 1:
             d = modmultinv(e, fin)
             return e, d
 
@@ -29,21 +29,21 @@ def genkeypairs(p, q):
         Monta e retorna os pares de números compondo as chaves
         pública e privada.
     """
-    n = p*q
+    n = p * q
     e, d = gen_e_d(p, q)
     return (e, n), (d, n)
 
 
 def encryptpart(m, e, n):
     """Criptografa um caracter"""
-    #return exp_mod_rap(m, e, n)
-    return (m**e) % n
+    # return exp_mod_rap(m, e, n)
+    return (m ** e) % n
 
 
 def decryptpart(c, d, n):
     """Descriptografa um caracter"""
-    #return exp_mod_rap(c, d, n)
-    return (c**d) % n
+    # return exp_mod_rap(c, d, n)
+    return (c ** d) % n
 
 
 def encrypt_encoded(encoded_txt, e, n):
@@ -88,4 +88,3 @@ def modmultinv(e, fin):
         if (e * d) % fin == 1:
             return d
     return None
-

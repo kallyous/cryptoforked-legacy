@@ -2,15 +2,17 @@ from cfrsa import genkeypairs, encrypt_encoded, decrypt_encoded, modmultinv
 from offsetter import encode_str, decode_str
 
 
-''' Recebe a opção escolhida pelo usuário e executa as operações pertinentes a esta opção.
-    Nada é de fato implementado aqui dentro, tudo referente ao RSA é chamado por funções.
-    Há uma pequena exceção, de uma operação de RSA redundante, pertinente à descriptografia,
-    explicada em sua própria seção. A causa dessa redundância é a própria exigência do
-    trabalho de Mat. Disc. '''
 def selectOption(opt):
+    """Recebe a opção escolhida pelo usuário e executa as operações pertinentes a esta opção.
+        Nada é de fato implementado aqui dentro, tudo referente ao RSA é chamado por funções.
+        Há uma pequena exceção, de uma operação de RSA redundante, pertinente à descriptografia,
+        explicada em sua própria seção. A causa dessa redundância é a própria exigência do
+        trabalho de Mat. Disc.
+    """
 
     # Opção de gerar chaves criptográficas.
     if opt == '1':
+
         # Nomes auto-descritivos dos arquivos que armazenarão informações das chaves.
         dn_name = 'rsa_d_n_key.priv'
         pqe_name = 'rsa_p_q_e_key.priv'
@@ -43,6 +45,7 @@ def selectOption(opt):
 
     # Opção de criptografar mensagens
     elif opt == '2':
+
         # Nomes auto-descritivos dos arquivos a armazenar a mensagem normal e criptografada
         plain_txt_name = 'plain.txt'
         encry_txt_name = 'encry.txt'
@@ -70,6 +73,7 @@ def selectOption(opt):
 
     # Descriptografa mensagem contida em arquivo
     elif opt == '3':
+
         # Nome auto-descritivo do arquivo onde armazenar o resultado da descriptografia da mensagem
         decry_file_name = 'decry.txt'
 
@@ -83,16 +87,16 @@ def selectOption(opt):
         q = int(q)  # Converte a string q no inteiro que ela representa
         e = int(e)  # Converte a string e no inteiro que ela representa
 
-        ''' --------------------------------------------------------------------------------------
+        """ --------------------------------------------------------------------------------------
             Completamente desnecessário, não fosse a exigência imposta nas especificações do trabalho
             de descriptografar usando (p q e). Melhor seria descartar p q, mantendo apenas d e n.
             O que é feito aqui nada mais é do que repetir o cáculo da inversa multiplicativa modular de 'e',
             que é o nosso d. Como usamos (d n) para descriptografar e (e n) para criptografar, faz
-            mais sentido armazenar-mos estas chaves e não (p q e). '''
-        n = p*q
-        fin = (p-1)*(q-1)
+            mais sentido armazenar-mos estas chaves e não (p q e). """
+        n = p * q
+        fin = (p - 1) * (q - 1)
         d = modmultinv(e, fin)
-        ''' -------------------------------------------------------------------------------------- '''
+        """ -------------------------------------------------------------------------------------- """
 
         # Carrega conteúdo criptografado do arquivo
         with open(encry_file_name, 'r') as file:
@@ -113,23 +117,29 @@ def selectOption(opt):
 
     # Executa os procedimentos de geração de chaves, criptografia e descriptografia para testar o programa
     elif opt == '4':
+
         # Escolha dos números primos (p q)
         p, q = 23, 29
+
         # Geração de (d e n)
         pub, priv = genkeypairs(p, q)
         e, n = pub
         d, n = priv
         print('p={} q={} n={} e={} d={}'.format(p, q, n, e, d))
+
         # Escolha da mensagem a criptografar
         plain_str = 'BOM DIA'
-        #1 Encoda mensagem no acordo do projeto
+
+        # 1 Encoda mensagem no acordo do projeto
         encoded_str = encode_str(plain_str)
         print('Texto inicial:', plain_str)
         print('Texto encodado:', encoded_str)
-        #2 Criptografa mensagem
+
+        # 2 Criptografa mensagem
         encry_str = encrypt_encoded(encoded_str, e, n)
         print('Texto criptografado:', encry_str)
         print(120 * '-')
+
         # Descriptografa mensagem
         decry_str = decrypt_encoded(encry_str, d, n)
         print('Texto descriptografado:', decry_str)
@@ -139,15 +149,19 @@ def selectOption(opt):
 
 # MAIN - O programa começa aqui!
 if __name__ == '__main__':
-    print(120*'-')
+
+    print(120 * '-')
     # Mensagem de título
     print('Cryptoforked 1.1.1b')
-    print(120*'-')
+    print(120 * '-')
+
     # Mensagem de opções disponíveis
     print('\nEscolha uma opção:\n\n1. Gerar chave pública\n2. Criptografar\n3. Descriptografar\n4. Debugar\n')
+
     # Lê opção escolhida pelo usuário
     opt = input('Opção: ')
     print(120 * '-')
+
     # Transmite opção escolhida para a função que chama os procedimentos pertinentes
     selectOption(opt)
     print(120 * '-')
