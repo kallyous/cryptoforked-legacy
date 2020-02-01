@@ -1,4 +1,4 @@
-# Cryptoforked (Legacy)
+# Cryptoforked (Legado)
 
 ---
 
