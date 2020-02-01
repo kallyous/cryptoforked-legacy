@@ -4,8 +4,9 @@
 
 Trabalho de Matemática Discreta - UFAL 2019
 
-Código legado.
+Professor: Lucas Amorim  
+Discentes: Lucas Carvalho, Anna Victória, Jadde Freitas
 
-Lucas Carvalho, Anna Victória, Jadde Freitas
+Código legado.
 
 ---
